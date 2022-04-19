@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적관리</title>
+</head>
+<body>
+    <div id = "contents">
+        <ul>
+            <li>이름 <input type="text" id = irem value="길동"></li>
+            <li>국어 <input type="text" id = kor value="1"></li>
+            <li>영어 <input type="text" id = eng value="2"></li>
+            <li>수학 <input type="text" id = mat value="3"></li>
+        </ul>
+        <input type="button" value="결과보기" onclick = "resultView()">
+        <input type="button" value="청소하기" onclick = "clearx()">
+    </div>
+    
+    <div id = "disp">출력</div>
+
+    <script>
+        function clearx(){
+            disp.innerHTML = ""
+        }
+        function resultView(){
+            kors = parseInt(kor.value)
+            engs = parseInt(eng.value)
+            mats = parseInt(mat.value)
+
+            tot = kors + engs + mats
+            avg = parseInt(tot / 3)
+
+            disp.innerHTML = irem.value + "<br>" + "총점" + tot + "<br>"
+            disp.innerHTML += "국어학점 :" + grade(kors) + "<br>"
+            disp.innerHTML += "영어학점 :" + grade(engs) + "<br>" 
+            disp.innerHTML += "수학학점 :" + grade(mats) + "<br>" 
+            disp.innerHTML += "졸업 :" + passfail(kors,engs,mats) + "<br>" 
+        }
+        function grade(j){
+            switch(parseInt(j / 10)){
+                case 10 :
+                case 9  : g = 'A'; break;
+                case 8  : g = 'B'; break;
+                case 7  : g = 'C'; break;
+                case 6  : g = 'D'; break;
+                default : g = 'F'
+            }
+            return g
+        }
+        function passfail(j1, j2 ,j3){
+            avg = (j1+j2+j3) / 3
+            if(j1 >= 60 || j2 >= 60 || j3 >= 60){
+                result = "졸업"
+            }
+            else{
+                result = "졸업x"
+            }
+            return result
+        }
+    </script>
+</body>
+</html>

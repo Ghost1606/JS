@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적구하기</title>
+</head>
+<body>
+    <div id="content">
+        <ul>
+            <li>
+                이름<input type="text" id="irem" value="홍길동"><br>
+            </li>
+            <li>
+                국어<input type="text" id="kor" value="1"><br>
+            </li>
+            <li>
+                영어<input type="text" id="eng" value="2"><br>
+            </li>
+            <li>
+                수학<input type="text" id="mat" value="3"><br>
+            </li>
+        </ul>
+        <input type="button" value="결과보기" onclick="resultView_f()">
+        <input type="button" value="청소하기" onclick="clean_f()">
+    </div>
+    <div id="disp">
+        <span>성적</span>
+    </div>
+
+    <script>
+        function clean_f(){ // 청소하기
+            disp.innerHTML = ""
+        }
+        function resultView_f(){ // 총점
+            kor_s = parseInt(kor.value)
+            eng_s = parseInt(eng.value)
+            mat_s = parseInt(mat.value)
+            tot = kor_s + eng_s + mat_s
+            avg = parseInt(tot / 3)
+
+            disp.innerHTML = irem.value + "<br>" + "총점" + tot + "<br>"
+            disp.innerHTML += "국어학점 : " + grade_f(kor_s) + "<br>"
+            disp.innerHTML += "영어학점 : " + grade_f(eng_s) + "<br>"
+            disp.innerHTML += "수학학점 : " + grade_f(mat_s) + "<br>"
+            disp.innerHTML += "졸업 : " + passfail(kor_s, eng_s, mat_s) 
+        }
+        function grade_f(j){ // 학점계산
+            switch(parseInt(j / 10)){  //100점이면 f -> case 10 추가 
+                case 10 : 
+                case 9 : g = 'A'; break;
+                case 8 : g = 'B'; break;
+                case 7 : g = 'C'; break;
+                case 6 : g = 'D'; break;
+                default : g = 'F'
+            }
+            return g
+        }
+        function passfail(j1, j2, j3){ //졸업 가능한지 삼항 연산자
+            avg = (j1 + j2 + j3) / 3
+            // result = avg >= 60 ? "졸업" : "1년 더" (시험문제 유출)
+            //if(j1 >= 60 && j2 >= 60 && j3 >= 60)
+            if(j1 >= 60 || j2 >= 60 || j3 >= 60)
+            {
+                result = "졸업"
+            }
+            else
+            {
+                result = "1년 더"
+            }
+            return result
+        }
+    </script>
+    2
+</body>
+</html>
